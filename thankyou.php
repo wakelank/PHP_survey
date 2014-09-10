@@ -31,6 +31,12 @@
     $homeworkPerYear = $resultsArray['Time Spent on Homework'] * 365;
     $tvComputerPerYear = ($resultsArray['Time Spent Watching TV/DVD'] + $resultsArray['Time Spent with Computer/Game']) * 365;
     $friendsAndFamilyPerYear = ($resultsArray['Time Spent with Family'] + $resultsArray['Time Spent with Friends']) * 365;
+    $totalHomeworkTime = (12 -$resultsArray['School Year']) * $homeworkPerYear;
+    $totalTvComputerTime = (12 - $resultsArray['School Year']) * $tvComputerPerYear;
+    $hoursAwake = 12 - $resultsArray['Wake Time'] + $resultsArray['Bed Time'];
+    $percentScreenTimePerDay = ($hoursAwake / ($resultsArray['Time Spent Watching TV/DVD'] + $resultsArray['Time Spent with Computer/Game'])) * 100;
+
+
 
 
     echo "Great! Thanks, " . $resultsArray['First Name'] . " for responding to our survey.<br>";
@@ -46,6 +52,9 @@
       echo "<li>" . $homeworkPerYear . " hours doing homework per year.</li>";
       echo "<li>" . $tvComputerPerYear . " hours spent in front of a TV or a computer per year.</li>";
       echo "<li>" . $friendsAndFamilyPerYear . " hours per year with friends and family.</li>";
+      echo "<li>" . $totalHomeworkTime . " hours doing homework until you are out of school.</li>";
+      echo "<li>" . $totalTvComputerTime . " hours in front of a screen until you are out of school.</li>";
+      echo "<li>" . $percentScreenTimePerDay . "percent of your day in front of a screen.</li>";
       echo "</ul>";
 
     echo "</div>";
