@@ -50,6 +50,12 @@
       $errorMessage = $errorMessage .  "Bed Time is required<br>";
     } else {
        $bedTime = $_POST["bedTime"];
+       if (!is_numeric($bedTime)) {
+         $errorMessage = $errorMessage . "Bed time must be a number between 1 and 12<br>";
+       }
+       if($bedTime < 1 || $bedTime > 12){
+         $errorMessage = $errorMessage . "Bed time must be a number between 1 and 12<br>";
+       }
     }
     if (empty($_POST["wakeTime"])) {
       $errorMessage = $errorMessage .  "Wake up time is required<br>";
@@ -60,6 +66,9 @@
       $errorMessage = $errorMessage .  "Number of siblings is required<br>";
     } else {
        $noOfSiblings = $_POST["noOfSiblings"];
+       if (!is_numeric($noOfSiblings)) {
+         $errorMessage = $errorMesssage . "Number of Siblings must be a number<br>";
+       }
     }
     if (empty($_POST["timeSpentHomework"])) {
       $errorMessage = $errorMessage .  "Time spent on homework is required<br>";
