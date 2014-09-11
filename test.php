@@ -11,9 +11,9 @@ class TestOne extends WebTestCase {
 
   function testFirstNameHasAValue(){
     $this->get('http://localhost/php/idiotBoxSurvey/index.php');
-    $this->setField('firstName', '');
-    $this->click('Submit');
-    $this->assertText('Submit');
+
+    $this->click('submit');
+    $this->assertText('First Name is required');
     }
 }
 

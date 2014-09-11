@@ -1,10 +1,11 @@
-body{
+body {
   background-color: lightgoldenrodyellow;
   color: purple;
   margin: 50px 50px;
   font-family: sans-serif;
 }
-.errorMessage {
+
+.errorMessage{
   color: red;
   border: thin red solid;
 }
