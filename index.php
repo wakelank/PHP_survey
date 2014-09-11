@@ -183,6 +183,57 @@
 
           mail($emailToAddress, $emailSubject, $emailMessage);
 
+          $result = mysql_connect("localhost", "idiotbox", "wakelank");
+
+          if (!$result)
+          {
+            print("<h2>Failed to connect to database!</h2>");
+          }
+          else
+          {
+            $result = mysql_select_db("idiotbox");
+
+            if (!$result)
+            {
+              print("<h2>Failed to select database!</h2>");
+            }
+            else
+            {
+              $sql = "INSERT INTO survey (firstName,
+                                          lastName,
+                                          birthdate,
+                                          schoolYear,
+                                          bedTime,
+                                          wakeTime,
+                                          timeSpentHomework,
+                                          timeSpentTV,
+                                          timeSpentComputer,
+                                          timeSpentFamily,
+                                          timeSpentFriends)
+                                          VALUES
+                                          (\"" . $firstName . "\",
+                                          \"" . $lastName . "\",
+                                          \"" . $birthYear . "-" .  $birthMonth . "-" . $birthDay . "\",
+                                          \"" . $schoolYear . "\",
+                                          \"" . $bedTime . "\",
+                                          \"" . $wakeTime . "\",
+                                          \"" . $timeSpentHomework . "\",
+                                          \"" . $timeSpentTV . "\",
+                                          \"" . $timeSpentComputer . "\",
+                                          \"" . $timeSpentFamily . "\",
+                                          \"" . $timeSpentFriends . "\");";
+
+              $result = mysql_query($sql);
+              if (!$result)
+              {
+                print("<h2>Failed to run the query! Error is:" . mysql_error(). "</h2>");
+              }
+              else
+              {
+                print("<p>Your answers have been recorded</p>");
+              }
+            }
+          }
 
       }
 
