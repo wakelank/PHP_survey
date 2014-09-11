@@ -8,6 +8,13 @@ class TestOne extends WebTestCase {
     $this->get('http://localhost/php/idiotBoxSurvey/index.php');
     $this->assertTitle('Idiot Box Survey');
   }
+
+  function testFirstNameHasAValue(){
+    $this->get('http://localhost/php/idiotBoxSurvey/index.php');
+    $this->setField('firstName', '');
+    $this->click('Submit');
+    $this->assertText('Submit');
+    }
 }
 
 ?>

@@ -4,3 +4,7 @@ body{
   margin: 50px 50px;
   font-family: sans-serif;
 }
+.errorMessage {
+  color: red;
+  border: thin red solid;
+}

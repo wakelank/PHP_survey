@@ -9,9 +9,39 @@
 <body>
   <h1> Idiot Box Survey </h1>
 
+    <!-- if (empty($_POST["name"])) {
+    $nameErr = "Name is required";
+  } else {
+    $name = test_input($_POST["name"]);
+  } -->
+
     <?php
-      if (!$_POST){
+    $errorMessage = "";
+
+      if($_POST){
+        $resultsArray = array('First Name' => $_POST['firstName'],
+                              'Last Name' => $_POST['lastName'],
+                              'Birth Year' => $_POST['birthYear'],
+                              'Birth Month' => $_POST['birthMonth'],
+                              'Birth Day' => $_POST['birthDay'],
+                              'School Year' => $_POST['schoolYear'],
+                              'Bed Time' => $_POST['bedTime'],
+                              'Wake Time' => $_POST['wakeTime'],
+                              'Number of Siblings' => $_POST['noOfSiblings'],
+                              'Time Spent on Homework' => $_POST['timeSpentHomework'],
+                              'Time Spent Watching TV/DVD' => $_POST['timeSpentTV'],
+                              'Time Spent with Computer/Game' => $_POST['timeSpentComputer'],
+                              'Time Spent with Family' => $_POST['timeSpentFamily'],
+                              'Time Spent with Friends' => $_POST['timeSpentFriends']
+                            );
+        validateData($resultsArray);
+      }
+
+      if (!$_POST || $errorMessage != ""){
         $filename = $_SERVER['PHP_SELF'];
+        echo "<div class='errorMessage'>";
+        echo $errorMessage;
+        echo "</div>";
         echo "<form action='" . $filename . "' method='post'>";
           echo "First name: <input type='text' name='firstName'><br>";
           echo "Last name: <input type='text' name='lastName'><br>";
@@ -49,21 +79,21 @@
         echo "</form>";
       }
       else{
-          $resultsArray = array('First Name' => $_POST['firstName'],
-                                'Last Name' => $_POST['lastName'],
-                                'Birth Year' => $_POST['birthYear'],
-                                'Birth Month' => $_POST['birthMonth'],
-                                'Birth Day' => $_POST['birthDay'],
-                                'School Year' => $_POST['schoolYear'],
-                                'Bed Time' => $_POST['bedTime'],
-                                'Wake Time' => $_POST['wakeTime'],
-                                'Number of Siblings' => $_POST['noOfSiblings'],
-                                'Time Spent on Homework' => $_POST['timeSpentHomework'],
-                                'Time Spent Watching TV/DVD' => $_POST['timeSpentTV'],
-                                'Time Spent with Computer/Game' => $_POST['timeSpentComputer'],
-                                'Time Spent with Family' => $_POST['timeSpentFamily'],
-                                'Time Spent with Friends' => $_POST['timeSpentFriends']
-                              );
+          // $resultsArray = array('First Name' => $_POST['firstName'],
+          //                       'Last Name' => $_POST['lastName'],
+          //                       'Birth Year' => $_POST['birthYear'],
+          //                       'Birth Month' => $_POST['birthMonth'],
+          //                       'Birth Day' => $_POST['birthDay'],
+          //                       'School Year' => $_POST['schoolYear'],
+          //                       'Bed Time' => $_POST['bedTime'],
+          //                       'Wake Time' => $_POST['wakeTime'],
+          //                       'Number of Siblings' => $_POST['noOfSiblings'],
+          //                       'Time Spent on Homework' => $_POST['timeSpentHomework'],
+          //                       'Time Spent Watching TV/DVD' => $_POST['timeSpentTV'],
+          //                       'Time Spent with Computer/Game' => $_POST['timeSpentComputer'],
+          //                       'Time Spent with Family' => $_POST['timeSpentFamily'],
+          //                       'Time Spent with Friends' => $_POST['timeSpentFriends']
+          //                     );
           $fullName = $resultsArray['First Name'] . ' ' . $resultsArray['Last Name'];
 
           $tvPerYear = $resultsArray['Time Spent Watching TV/DVD'] * 365;
@@ -106,6 +136,17 @@
 
           mail($emailToAddress, $emailSubject, $emailMessage);
 
+
+
+      }
+
+      function validateData($resultsArray){
+        global $errorMessage;
+        foreach($resultsArray as $key => $value){
+          if(empty($value)){
+            $errorMessage = $errorMessage . $key . " must be filled in.</br>";
+          }
+        }
       }
     ?>
 
